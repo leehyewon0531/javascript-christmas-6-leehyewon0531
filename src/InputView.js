@@ -1,4 +1,5 @@
-import { GUIDE_MSG } from "./constants/guideMsg";
+import { GUIDE_MSG } from "./constants/guideMsg.js";
+import { Console } from "@woowacourse/mission-utils";
 
 const InputView = {
 	async readDate() {

@@ -1,4 +1,5 @@
-import { BENEFIT_LIST, GUIDE_MSG } from "./constants/guideMsg";
+import { BENEFIT_LIST, GUIDE_MSG } from "./constants/guideMsg.js";
+import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
 	printOrderMenu() {
