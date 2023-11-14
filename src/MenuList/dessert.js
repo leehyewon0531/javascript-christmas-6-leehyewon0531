@@ -1,4 +1,4 @@
-import Menu from "../Menu";
+import Menu from "../Menu.js";
 
 export const dessert = {
   chocoCake: new Menu('초코케이크', 15000),

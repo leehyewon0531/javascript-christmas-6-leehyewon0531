@@ -1,4 +1,4 @@
-import Menu from "../Menu";
+import Menu from "../Menu.js";
 
 export const mainMenu = {
   tBoneSteak: new Menu('티본스테이크', 55000),
