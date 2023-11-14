@@ -4,6 +4,7 @@ import { beverage } from "./MenuList/beverage.js";
 import { dessert } from "./MenuList/dessert.js";
 import { mainMenu } from "./MenuList/mainMenu.js";
 import OutputView from "./OutputView.js";
+import { BENEFIT_LIST } from "./constants/benefits.js";
 import { GIVEAWAY_LIST } from "./constants/giveaway.js";
 
 class EventRunner {
@@ -21,6 +22,7 @@ class EventRunner {
     this.showOrderMenu(menuObj);
     this.showBeforeDiscount(menuObj);
     this.showGiveaway(menuObj);
+    this.showBenefitDetails(visitDate, menuObj);
   }
 
   showOrderMenu(menuObj) {
@@ -95,6 +97,24 @@ class EventRunner {
       OutputView.printMsg(GIVEAWAY_LIST.none);
       return;
     }
+  }
+
+  showBenefitDetails(visitDate, menuObj) {
+    OutputView.printBenefitDetails();
+    const calculateBeforeDiscount = this.calculateBeforeDiscount(menuObj);
+    if(calculateBeforeDiscount < 10000) {
+      OutputView.printMsg(BENEFIT_LIST.none);
+      return;
+    }
+    if(calculateBeforeDiscount >= 10000) {
+      const formattedChristmasDday = this.addCommas(this.calculateChristmasDday(visitDate));
+      OutputView.printMsg(BENEFIT_LIST.christmasDday + `-${formattedChristmasDday}원\n`);
+      
+    }
+  }
+
+  calculateChristmasDday(visitDate) {
+    return (1000 + (visitDate - 1) * 100);
   }
 }
 

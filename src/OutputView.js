@@ -1,33 +1,33 @@
-import { BENEFIT_LIST, GUIDE_MSG } from "./constants/guideMsg.js";
+import { OUTPUT_LIST, GUIDE_MSG } from "./constants/guideMsg.js";
 import { Console } from '@woowacourse/mission-utils';
 
 const OutputView = {
 	printOrderMenu() {
-		Console.print(BENEFIT_LIST.orderMenu);
+		Console.print(OUTPUT_LIST.orderMenu);
 	},
 
 	printBeforeDiscount() {
-		Console.print(BENEFIT_LIST.beforeDiscount);
+		Console.print(OUTPUT_LIST.beforeDiscount);
 	},
 
 	printGiveaway() {
-		Console.print(BENEFIT_LIST.giveaway);
+		Console.print(OUTPUT_LIST.giveaway);
 	},
 
 	printBenefitDetails() {
-		Console.print(BENEFIT_LIST.benefitDetails);
+		Console.print(OUTPUT_LIST.benefitDetails);
 	},
 
 	printTotalBenefit() {
-		Console.print(BENEFIT_LIST.totalBenefit);
+		Console.print(OUTPUT_LIST.totalBenefit);
 	},
 
 	printAfterDiscount() {
-		Console.print(BENEFIT_LIST.afterDiscount);
+		Console.print(OUTPUT_LIST.afterDiscount);
 	},
 
 	printEventBadge() {
-		Console.print(BENEFIT_LIST.eventBadge);
+		Console.print(OUTPUT_LIST.eventBadge);
 	},
 
 	printWelcomeMsg() {

@@ -5,7 +5,7 @@ export const GUIDE_MSG = {
   eventBenefit: '우테코 식당에서 받을 이벤트 혜택 미리 보기!\n',
 }
 
-export const BENEFIT_LIST = {
+export const OUTPUT_LIST = {
   orderMenu: '<주문 메뉴>',
   beforeDiscount: '<할인 전 총주문 금액>',
   giveaway: '<증정 메뉴>',
