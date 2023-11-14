@@ -10,7 +10,7 @@ class App {
     const menuAndQuantity = await InputView.readMenu();
     // menuAndQuantity 유효성 검사
 
-    OutputView.printEventBenefitMsg();
+    OutputView.printEventBenefitMsg(`12월 ${visitDate}일에 `);
   }
 }
 

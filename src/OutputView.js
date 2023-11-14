@@ -34,8 +34,8 @@ const OutputView = {
 		Console.print(GUIDE_MSG.welcome);
 	},
 
-	printEventBenefitMsg() {
-		Console.print(GUIDE_MSG.eventBenefit);
+	printEventBenefitMsg(date) {
+		Console.print(date+GUIDE_MSG.eventBenefit);
 	}
 }
 
