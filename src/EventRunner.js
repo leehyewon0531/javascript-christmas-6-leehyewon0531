@@ -4,6 +4,7 @@ import { beverage } from "./MenuList/beverage.js";
 import { dessert } from "./MenuList/dessert.js";
 import { mainMenu } from "./MenuList/mainMenu.js";
 import OutputView from "./OutputView.js";
+import { GIVEAWAY_LIST } from "./constants/giveaway.js";
 
 class EventRunner {
   async run() {
@@ -19,6 +20,7 @@ class EventRunner {
     const menuObj = this.makeOrderMenuObj(menuAndQuantity);
     this.showOrderMenu(menuObj);
     this.showBeforeDiscount(menuObj);
+    this.showGiveaway(menuObj);
   }
 
   showOrderMenu(menuObj) {
@@ -49,7 +51,7 @@ class EventRunner {
     OutputView.printBeforeDiscount();
     const calculatedPrice = this.calculateBeforeDiscount(menuObj);
     const addedCommaPrice = this.addCommas(calculatedPrice);
-    OutputView.printMsg(`${addedCommaPrice}원`);
+    OutputView.printMsg(`${addedCommaPrice}원\n`);
   }
 
   calculateBeforeDiscount(menuObj) {
@@ -79,6 +81,19 @@ class EventRunner {
     }
     for (const key in mainMenu) {
       if(mainMenu[key].get_name == name) return mainMenu[key].get_price;
+    }
+  }
+
+  showGiveaway(menuObj) {
+    OutputView.printGiveaway();
+    const calculateBeforeDiscount = this.calculateBeforeDiscount(menuObj);
+    if(calculateBeforeDiscount >= 120000) {
+      OutputView.printMsg(GIVEAWAY_LIST.champagneGiveaway);
+      return;
+    }
+    if(calculateBeforeDiscount < 120000) {
+      OutputView.printMsg(GIVEAWAY_LIST.none);
+      return;
     }
   }
 }
