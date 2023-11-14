@@ -7,3 +7,5 @@ class Menu {
     this.#price = price;
   }
 }
+
+export default Menu;
