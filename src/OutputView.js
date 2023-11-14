@@ -36,6 +36,10 @@ const OutputView = {
 
 	printEventBenefitMsg(date) {
 		Console.print(date+GUIDE_MSG.eventBenefit);
+	},
+
+	printMsg(msg) {
+		Console.print(msg);
 	}
 }
 
