@@ -11,23 +11,33 @@ class EventRunner {
     // menuAndQuantity 유효성 검사
 
     OutputView.printEventBenefitMsg(`12월 ${visitDate}일에 `);
-    this.showOrderMenu(menuAndQuantity);
+
+    const menuObj = this.makeOrderMenuObj(menuAndQuantity);
+    this.showOrderMenu(menuObj);
   }
 
-  showOrderMenu(menuAndQuan) {
+  showOrderMenu(menuObj) {
     OutputView.printOrderMenu();
-    const formattedList = this.formatOrderMenu(menuAndQuan);
+    const formattedList = this.formatOrderMenu(menuObj);
     OutputView.printMsg(formattedList);
   }
 
-  formatOrderMenu(menuAndQuan) {
-    const splitMenu = menuAndQuan.split(',');
+  formatOrderMenu(menuObj) {
     let result = '';
+    for (const key in menuObj) {
+      result += `${key} ${menuObj[key]}개\n`;
+    }
+    return result;
+  }
+
+  makeOrderMenuObj(menuAndQuan) {
+    const obj = {};
+    const splitMenu = menuAndQuan.split(',');
     splitMenu.forEach(el => {
       const [menu, quantity] = el.split('-');
-      result += `${menu} ${quantity}개\n`;
+      obj[menu] = quantity;
     });
-    return result;
+    return obj;
   }
 }
 
