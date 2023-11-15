@@ -40,6 +40,7 @@ class EventRunner {
 
         menuObj = this.makeOrderMenuObj(menuAndQuantity);
         Validator.isInMenu(menuObj);
+        Validator.isOverRange(menuObj);
 
         flag = true;
       } catch(err) {

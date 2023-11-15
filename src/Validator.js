@@ -61,6 +61,16 @@ class Validator {
     if(new Set(menuArr).size !== menuArr.length) throw new Error(this.makeErrorMsg(ERROR_MSG.duplicateMenu));
   }
 
+  static isOverRange(menuObj) {
+    const keys = Object.keys(menuObj);
+    let cnt = 0;
+    keys.forEach(el => {
+      cnt += Number(menuObj[el]);
+    });
+    if(cnt > 20) throw new Error(this.makeErrorMsg(ERROR_MSG.overTwenty));
+    return;
+  }
+
   static isKorean(str) {
     const koreanRegex = /^[가-힣]*$/;
     return koreanRegex.test(str);
