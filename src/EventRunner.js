@@ -8,12 +8,25 @@ import { BENEFIT_LIST } from "./constants/benefits.js";
 import { GIVEAWAY_LIST } from "./constants/giveaway.js";
 import { starDayArr, weekendArr } from "./constants/day.js";
 import { BADGES } from "./constants/badges.js";
+import Validator from "./Validator.js";
 
 class EventRunner {
   async run() {
     OutputView.printWelcomeMsg();
-    const visitDate = await InputView.readDate();
-    // visitDate 유효성 검사
+    let flag = false;
+    let visitDate = '';
+
+    do {
+      try {
+        visitDate = await InputView.readDate();
+        Validator.isNumber(visitDate);
+        Validator.isValidDate(visitDate);
+
+        flag = true;
+      } catch(err) {
+        OutputView.printMsg(err.message)
+      }
+    } while(!flag);
 
     const menuAndQuantity = await InputView.readMenu();
     // menuAndQuantity 유효성 검사
