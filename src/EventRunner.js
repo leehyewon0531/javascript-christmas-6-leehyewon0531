@@ -25,7 +25,7 @@ class EventRunner {
     this.showGiveaway(menuObj);
     const totalDiscount = this.showBenefitDetails(visitDate, menuObj);
     this.showTotalBenefit(totalDiscount);
-    this.showAfterDiscount(this.calculateBeforeDiscount(menuObj) - totalDiscount);
+    this.showAfterDiscount(this.calculateBeforeDiscount(menuObj) - totalDiscount + (this.calculateGiveaway(menuObj) ? 25000 : 0));
   }
 
   showOrderMenu(menuObj) {
