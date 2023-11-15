@@ -72,18 +72,45 @@ class EventRunner {
   }
   
   findPrice(name) {
+    const appetizerKey = this.findInAppetizer(name);
+    if(appetizerKey) return appetizer[appetizerKey].get_price;
+    
+    const beverageKey = this.findInBeverage(name);
+    if(beverageKey) return beverage[beverageKey].get_price;
+
+    const dessertKey = this.findInDessert(name);
+    if(dessertKey) return dessert[dessertKey].get_price;
+
+    const mainMenuKey = this.findInMainMenu(name);
+    if(mainMenuKey) return mainMenu[mainMenuKey].get_price;
+  }
+
+  findInAppetizer(name) {
     for (const key in appetizer) {
-      if(appetizer[key].get_name == name) return appetizer[key].get_price;
+      if(appetizer[key].get_name == name) return key;
     }
+    return '';
+  }
+
+  findInBeverage(name) {
     for (const key in beverage) {
-      if(beverage[key].get_name == name) return beverage[key].get_price;
+      if(beverage[key].get_name == name) return key;
     }
+    return '';
+  }
+
+  findInDessert(name) {
     for (const key in dessert) {
-      if(dessert[key].get_name == name) return dessert[key].get_price;
+      if(dessert[key].get_name == name) return key;
     }
+    return '';
+  }
+
+  findInMainMenu(name) {
     for (const key in mainMenu) {
-      if(mainMenu[key].get_name == name) return mainMenu[key].get_price;
+      if(mainMenu[key].get_name == name) return key;
     }
+    return '';
   }
 
   showGiveaway(menuObj) {
