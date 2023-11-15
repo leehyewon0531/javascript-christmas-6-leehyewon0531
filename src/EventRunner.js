@@ -9,6 +9,7 @@ import { GIVEAWAY_LIST } from "./constants/giveaway.js";
 import { starDayArr, weekendArr } from "./constants/day.js";
 import { BADGES } from "./constants/badges.js";
 import Validator from "./Validator.js";
+import { ERROR_MSG } from "./constants/errorMsg.js";
 
 class EventRunner {
   async run() {
@@ -19,7 +20,7 @@ class EventRunner {
     do {
       try {
         visitDate = await InputView.readDate();
-        Validator.isNumber(visitDate);
+        Validator.isNumber(visitDate, ERROR_MSG.invalidDate);
         Validator.isValidDate(visitDate);
 
         flag = true;
@@ -28,8 +29,17 @@ class EventRunner {
       }
     } while(!flag);
 
-    const menuAndQuantity = await InputView.readMenu();
-    // menuAndQuantity 유효성 검사
+    flag = false;
+    let menuAndQuantity = '';
+
+    do {
+      try {
+        menuAndQuantity = await InputView.readMenu();
+        Validator.isValidMenu(menuAndQuantity);
+      } catch(err) {
+        OutputView.printMsg(err.message);
+      }
+    } while(!flag);
 
     OutputView.printEventBenefitMsg(`12월 ${visitDate}일에 `);
 
