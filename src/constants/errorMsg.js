@@ -1,5 +1,5 @@
 export const ERROR_MSG = {
-  invalidDate: '식당 방문 날짜는 1 이상 31 이하의 숫자여야 합니다.',
+  invalidDate: '유효하지 않은 날짜입니다. 다시 입력해 주세요.',
   notInMenu: '메뉴판에 있는 메뉴만 구매 가능합니다.',
   invalidMenuAmount: '메뉴 개수는 1 이상의 숫자여야 합니다.',
   invalidMenuFormat: '메뉴는 예시 형식에 맞게 입력해야 합니다.',
