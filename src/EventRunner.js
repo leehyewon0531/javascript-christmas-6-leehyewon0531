@@ -116,18 +116,19 @@ class EventRunner {
 
   showGiveaway(menuObj) {
     OutputView.printGiveaway();
-    const calculateBeforeDiscount = this.calculateBeforeDiscount(menuObj);
-    if(this.calculateGiveaway(calculateBeforeDiscount)){
+    
+    if(this.calculateGiveaway(menuObj)){
       OutputView.printMsg(GIVEAWAY_LIST.champagneGiveaway);
       return;
     }
-    if(!this.calculateGiveaway(calculateBeforeDiscount)) {
+    if(!this.calculateGiveaway(menuObj)) {
       OutputView.printMsg(GIVEAWAY_LIST.none);
       return;
     }
   }
 
-  calculateGiveaway(beforeDiscount) {
+  calculateGiveaway(menuObj) {
+    const beforeDiscount = this.calculateBeforeDiscount(menuObj);
     if(beforeDiscount >= 120000) return true;
     if(beforeDiscount < 120000) return false;
   }
@@ -156,6 +157,11 @@ class EventRunner {
       totalDiscount += specialDiscount;
       const formattedSpecial = this.addCommas(specialDiscount);
       OutputView.printMsg(BENEFIT_LIST.special + `-${formattedSpecial}원`);
+
+      const giveawayDiscount = this.calculateGiveaway(menuObj) ? 25000 : 0;
+      totalDiscount += giveawayDiscount;
+      const formattedGiveaway = this.addCommas(giveawayDiscount);
+      OutputView.printMsg(BENEFIT_LIST.giveawayEvent + `-${formattedGiveaway}원\n`);
     }
   }
 
