@@ -1,3 +1,4 @@
+import EventRunner from "./EventRunner.js";
 import { ERROR_MSG } from "./constants/errorMsg.js";
 
 class Validator {
@@ -40,6 +41,20 @@ class Validator {
     const eachArr = el.split('-');
     if(!this.isKorean(eachArr[0])) throw new Error(this.makeErrorMsg(ERROR_MSG.invalidMenuFormat));
     this.isNumber(eachArr[1], ERROR_MSG.invalidMenuFormat);
+  }
+
+  static isInMenu(menuObj) {
+    const keys = Object.keys(menuObj);
+    let flag = false;
+    keys.forEach(el => {
+      if(EventRunner.findInAppetizer(el)) flag = true;
+      if(EventRunner.findInBeverage(el)) flag = true;
+      if(EventRunner.findInDessert(el)) flag = true;
+      if(EventRunner.findInMainMenu(el)) flag = true;
+    })
+
+    if(flag) return;
+    else throw new Error(this.makeErrorMsg(ERROR_MSG.notInMenu));
   }
 
   static isKorean(str) {

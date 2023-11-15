@@ -31,11 +31,17 @@ class EventRunner {
 
     flag = false;
     let menuAndQuantity = '';
+    let menuObj = {};
 
     do {
       try {
         menuAndQuantity = await InputView.readMenu();
         Validator.isValidMenu(menuAndQuantity);
+
+        menuObj = this.makeOrderMenuObj(menuAndQuantity);
+        Validator.isInMenu(menuObj);
+
+        flag = true;
       } catch(err) {
         OutputView.printMsg(err.message);
       }
@@ -43,7 +49,6 @@ class EventRunner {
 
     OutputView.printEventBenefitMsg(`12월 ${visitDate}일에 `);
 
-    const menuObj = this.makeOrderMenuObj(menuAndQuantity);
     this.showOrderMenu(menuObj);
     this.showBeforeDiscount(menuObj);
     this.showGiveaway(menuObj);
@@ -113,28 +118,28 @@ class EventRunner {
     if(mainMenuKey) return mainMenu[mainMenuKey].get_price;
   }
 
-  findInAppetizer(name) {
+  static findInAppetizer(name) {
     for (const key in appetizer) {
       if(appetizer[key].get_name == name) return key;
     }
     return '';
   }
 
-  findInBeverage(name) {
+  static findInBeverage(name) {
     for (const key in beverage) {
       if(beverage[key].get_name == name) return key;
     }
     return '';
   }
 
-  findInDessert(name) {
+  static findInDessert(name) {
     for (const key in dessert) {
       if(dessert[key].get_name == name) return key;
     }
     return '';
   }
 
-  findInMainMenu(name) {
+  static findInMainMenu(name) {
     for (const key in mainMenu) {
       if(mainMenu[key].get_name == name) return key;
     }
