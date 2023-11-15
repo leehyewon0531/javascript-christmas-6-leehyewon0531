@@ -57,6 +57,10 @@ class Validator {
     else throw new Error(this.makeErrorMsg(ERROR_MSG.notInMenu));
   }
 
+  static isDuplicateMenu(menuArr) {
+    if(new Set(menuArr).size !== menuArr.length) throw new Error(this.makeErrorMsg(ERROR_MSG.duplicateMenu));
+  }
+
   static isKorean(str) {
     const koreanRegex = /^[가-힣]*$/;
     return koreanRegex.test(str);

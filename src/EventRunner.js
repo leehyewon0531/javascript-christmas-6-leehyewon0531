@@ -74,11 +74,14 @@ class EventRunner {
 
   makeOrderMenuObj(menuAndQuan) {
     const obj = {};
+    const menuArr = [];
     const splitMenu = menuAndQuan.split(',');
     splitMenu.forEach(el => {
       const [menu, quantity] = el.split('-');
+      menuArr.push(menu);
       obj[menu] = quantity;
     });
+    Validator.isDuplicateMenu(menuArr);
     return obj;
   }
 
@@ -105,16 +108,16 @@ class EventRunner {
   }
   
   findPrice(name) {
-    const appetizerKey = this.findInAppetizer(name);
+    const appetizerKey = EventRunner.findInAppetizer(name);
     if(appetizerKey) return appetizer[appetizerKey].get_price;
     
-    const beverageKey = this.findInBeverage(name);
+    const beverageKey = EventRunner.findInBeverage(name);
     if(beverageKey) return beverage[beverageKey].get_price;
 
-    const dessertKey = this.findInDessert(name);
+    const dessertKey = EventRunner.findInDessert(name);
     if(dessertKey) return dessert[dessertKey].get_price;
 
-    const mainMenuKey = this.findInMainMenu(name);
+    const mainMenuKey = EventRunner.findInMainMenu(name);
     if(mainMenuKey) return mainMenu[mainMenuKey].get_price;
   }
 
@@ -212,7 +215,7 @@ class EventRunner {
       const keys = Object.keys(menuObj);
 
       keys.forEach(el => {
-        if(this.findInDessert(el)) dessertCnt += menuObj[el];
+        if(EventRunner.findInDessert(el)) dessertCnt += menuObj[el];
       })
 
       return dessertCnt * 2023;
