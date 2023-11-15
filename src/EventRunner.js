@@ -23,7 +23,8 @@ class EventRunner {
     this.showOrderMenu(menuObj);
     this.showBeforeDiscount(menuObj);
     this.showGiveaway(menuObj);
-    this.showBenefitDetails(visitDate, menuObj);
+    const totalDiscount = this.showBenefitDetails(visitDate, menuObj);
+    this.showTotalBenefit(totalDiscount);
   }
 
   showOrderMenu(menuObj) {
@@ -162,6 +163,8 @@ class EventRunner {
       totalDiscount += giveawayDiscount;
       const formattedGiveaway = this.addCommas(giveawayDiscount);
       OutputView.printMsg(BENEFIT_LIST.giveawayEvent + `-${formattedGiveaway}원\n`);
+
+      return totalDiscount;
     }
   }
 
@@ -188,6 +191,12 @@ class EventRunner {
   calculateSpecial(visitDate) {
     if(starDayArr.includes(Number(visitDate))) return 1000;
     if(!starDayArr.includes(Number(visitDate))) return 0;
+  }
+
+  showTotalBenefit(total) {
+    OutputView.printTotalBenefit();
+    const formattedTotal = this.addCommas(total);
+    OutputView.printMsg(`-${formattedTotal}원\n`);
   }
 }
 
