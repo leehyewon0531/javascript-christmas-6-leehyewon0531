@@ -114,7 +114,8 @@ class EventRunner {
   }
 
   calculateChristmasDday(visitDate) {
-    return (1000 + (visitDate - 1) * 100);
+    if(visitDate > 25) return 0;
+    if(visitDate <= 25) return (1000 + (visitDate - 1) * 100);
   }
 }
 
