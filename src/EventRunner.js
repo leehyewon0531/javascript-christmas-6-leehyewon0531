@@ -178,7 +178,7 @@ class EventRunner {
       const keys = Object.keys(menuObj);
 
       keys.forEach(el => {
-        if(this.findInDessert(el)) dessertCnt++;
+        if(this.findInDessert(el)) dessertCnt += menuObj[el];
       })
 
       return dessertCnt * 2023;
