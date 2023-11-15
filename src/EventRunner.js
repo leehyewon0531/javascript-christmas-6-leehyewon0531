@@ -6,7 +6,7 @@ import { mainMenu } from "./MenuList/mainMenu.js";
 import OutputView from "./OutputView.js";
 import { BENEFIT_LIST } from "./constants/benefits.js";
 import { GIVEAWAY_LIST } from "./constants/giveaway.js";
-import { weekendArr } from "./constants/weekend.js";
+import { starDayArr, weekendArr } from "./constants/day.js";
 
 class EventRunner {
   async run() {
@@ -146,6 +146,11 @@ class EventRunner {
       totalDiscount += weekdayDiscount;
       const formattedWeekday = this.addCommas(weekdayDiscount);
       OutputView.printMsg(BENEFIT_LIST.weekday + `-${formattedWeekday}원`);
+
+      const specialDiscount = this.calculateSpecial(visitDate);
+      totalDiscount += specialDiscount;
+      const formattedSpecial = this.addCommas(specialDiscount);
+      OutputView.printMsg(BENEFIT_LIST.special + `-${formattedSpecial}원`);
     }
   }
 
@@ -155,10 +160,10 @@ class EventRunner {
   }
 
   calculateWeekday(visitDate, menuObj) {
-    if(weekendArr.includes(visitDate)) return 0;
+    if(weekendArr.includes(Number(visitDate))) return 0;
 
     let dessertCnt = 0;
-    if(!weekendArr.includes(visitDate)) {
+    if(!weekendArr.includes(Number(visitDate))) {
       const keys = Object.keys(menuObj);
 
       keys.forEach(el => {
@@ -167,6 +172,11 @@ class EventRunner {
 
       return dessertCnt * 2023;
     }
+  }
+
+  calculateSpecial(visitDate) {
+    if(starDayArr.includes(Number(visitDate))) return 1000;
+    if(!starDayArr.includes(Number(visitDate))) return 0;
   }
 }
 
