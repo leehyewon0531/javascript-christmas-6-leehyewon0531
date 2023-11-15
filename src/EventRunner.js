@@ -25,7 +25,7 @@ class EventRunner {
 
         flag = true;
       } catch(err) {
-        OutputView.printMsg(err.message)
+        OutputView.printMsg(err.message);
       }
     } while(!flag);
 
