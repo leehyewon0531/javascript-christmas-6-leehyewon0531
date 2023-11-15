@@ -7,6 +7,7 @@ import OutputView from "./OutputView.js";
 import { BENEFIT_LIST } from "./constants/benefits.js";
 import { GIVEAWAY_LIST } from "./constants/giveaway.js";
 import { starDayArr, weekendArr } from "./constants/day.js";
+import { BADGES } from "./constants/badges.js";
 
 class EventRunner {
   async run() {
@@ -26,6 +27,7 @@ class EventRunner {
     const totalDiscount = this.showBenefitDetails(visitDate, menuObj);
     this.showTotalBenefit(totalDiscount);
     this.showAfterDiscount(this.calculateBeforeDiscount(menuObj) - totalDiscount + (this.calculateGiveaway(menuObj) ? 25000 : 0));
+    this.showEventBadge(totalDiscount);
   }
 
   showOrderMenu(menuObj) {
@@ -204,6 +206,30 @@ class EventRunner {
     OutputView.printAfterDiscount();
     const formattedAfterDiscount = this.addCommas(afterDiscount);
     OutputView.printMsg(`${formattedAfterDiscount}원\n`);
+  }
+
+  showEventBadge(totalDiscount) {
+    OutputView.printEventBadge();
+    
+    if(totalDiscount < 5000) {
+      OutputView.printMsg(BADGES.none);
+      return;
+    }
+
+    if((totalDiscount >= 5000) && (totalDiscount < 10000)) {
+      OutputView.printMsg(BADGES.star);
+      return;
+    }
+
+    if((totalDiscount >= 10000) && (totalDiscount < 20000)) {
+      OutputView.printMsg(BADGES.tree);
+      return;
+    }
+
+    if(totalDiscount >= 20000) {
+      OutputView.printMsg(BADGES.santa);
+      return;
+    }
   }
 }
 
