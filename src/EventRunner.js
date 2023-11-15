@@ -25,6 +25,7 @@ class EventRunner {
     this.showGiveaway(menuObj);
     const totalDiscount = this.showBenefitDetails(visitDate, menuObj);
     this.showTotalBenefit(totalDiscount);
+    this.showAfterDiscount(this.calculateBeforeDiscount(menuObj) - totalDiscount);
   }
 
   showOrderMenu(menuObj) {
@@ -197,6 +198,12 @@ class EventRunner {
     OutputView.printTotalBenefit();
     const formattedTotal = this.addCommas(total);
     OutputView.printMsg(`-${formattedTotal}원\n`);
+  }
+
+  showAfterDiscount(afterDiscount) {
+    OutputView.printAfterDiscount();
+    const formattedAfterDiscount = this.addCommas(afterDiscount);
+    OutputView.printMsg(`${formattedAfterDiscount}원\n`);
   }
 }
 
