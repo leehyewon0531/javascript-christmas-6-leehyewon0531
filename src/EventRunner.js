@@ -117,14 +117,19 @@ class EventRunner {
   showGiveaway(menuObj) {
     OutputView.printGiveaway();
     const calculateBeforeDiscount = this.calculateBeforeDiscount(menuObj);
-    if(calculateBeforeDiscount >= 120000) {
+    if(this.calculateGiveaway(calculateBeforeDiscount)){
       OutputView.printMsg(GIVEAWAY_LIST.champagneGiveaway);
       return;
     }
-    if(calculateBeforeDiscount < 120000) {
+    if(!this.calculateGiveaway(calculateBeforeDiscount)) {
       OutputView.printMsg(GIVEAWAY_LIST.none);
       return;
     }
+  }
+
+  calculateGiveaway(beforeDiscount) {
+    if(beforeDiscount >= 120000) return true;
+    if(beforeDiscount < 120000) return false;
   }
 
   showBenefitDetails(visitDate, menuObj) {
