@@ -6,6 +6,7 @@ import { mainMenu } from "./MenuList/mainMenu.js";
 import OutputView from "./OutputView.js";
 import { BENEFIT_LIST } from "./constants/benefits.js";
 import { GIVEAWAY_LIST } from "./constants/giveaway.js";
+import { weekendArr } from "./constants/weekend.js";
 
 class EventRunner {
   async run() {
@@ -128,21 +129,44 @@ class EventRunner {
 
   showBenefitDetails(visitDate, menuObj) {
     OutputView.printBenefitDetails();
+    let totalDiscount = 0;
+
     const calculateBeforeDiscount = this.calculateBeforeDiscount(menuObj);
     if(calculateBeforeDiscount < 10000) {
       OutputView.printMsg(BENEFIT_LIST.none);
-      return;
+      return 0;
     }
     if(calculateBeforeDiscount >= 10000) {
-      const formattedChristmasDday = this.addCommas(this.calculateChristmasDday(visitDate));
-      OutputView.printMsg(BENEFIT_LIST.christmasDday + `-${formattedChristmasDday}원\n`);
+      const christmasDdayDiscount = this.calculateChristmasDday(visitDate);
+      totalDiscount += christmasDdayDiscount;
+      const formattedChristmasDday = this.addCommas(christmasDdayDiscount);
+      OutputView.printMsg(BENEFIT_LIST.christmasDday + `-${formattedChristmasDday}원`);
       
+      const weekdayDiscount = this.calculateWeekday(visitDate, menuObj);
+      totalDiscount += weekdayDiscount;
+      const formattedWeekday = this.addCommas(weekdayDiscount);
+      OutputView.printMsg(BENEFIT_LIST.weekday + `-${formattedWeekday}원`);
     }
   }
 
   calculateChristmasDday(visitDate) {
     if(visitDate > 25) return 0;
     if(visitDate <= 25) return (1000 + (visitDate - 1) * 100);
+  }
+
+  calculateWeekday(visitDate, menuObj) {
+    if(weekendArr.includes(visitDate)) return 0;
+
+    let dessertCnt = 0;
+    if(!weekendArr.includes(visitDate)) {
+      const keys = Object.keys(menuObj);
+
+      keys.forEach(el => {
+        if(this.findInDessert(el)) dessertCnt++;
+      })
+
+      return dessertCnt * 2023;
+    }
   }
 }
 
