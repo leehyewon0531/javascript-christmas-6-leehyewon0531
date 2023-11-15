@@ -71,6 +71,25 @@ class Validator {
     return;
   }
 
+  static isOnlyBeverage(menuObj) {
+    const cntObj = {
+      appetizer: 0,
+      beverage: 0,
+      dessert: 0,
+      mainMenu: 0
+    };
+
+    const keys = Object.keys(menuObj);
+    keys.forEach(el => {
+      if(EventRunner.findInAppetizer(el)) cntObj['appetizer']++;
+      if(EventRunner.findInBeverage(el)) cntObj['beverage']++;
+      if(EventRunner.findInDessert(el)) cntObj['dessert']++;
+      if(EventRunner.findInMainMenu(el)) cntObj['mainMenu']++;
+    })
+
+    if(cntObj['appetizer'] + cntObj['mainMenu'] + cntObj['dessert'] == 0) throw new Error(this.makeErrorMsg(ERROR_MSG.onlyBeverage));
+  }
+
   static isKorean(str) {
     const koreanRegex = /^[가-힣]*$/;
     return koreanRegex.test(str);

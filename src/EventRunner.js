@@ -41,6 +41,7 @@ class EventRunner {
         menuObj = this.makeOrderMenuObj(menuAndQuantity);
         Validator.isInMenu(menuObj);
         Validator.isOverRange(menuObj);
+        Validator.isOnlyBeverage(menuObj);
 
         flag = true;
       } catch(err) {
